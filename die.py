@@ -8,12 +8,14 @@ from read_maze import *
 
 class Die:
     """ Represents the die for the game. """
-    def __init__(self, start, goal, board):
+    def __init__(self, start, goal, board, parent, value, north, east):
         self.board = board
         self.start = start
         self.goal = goal
-        self.value = 1
-        self.north = 2
+        self.parent = parent
+        self.value = value
+        self.north = north
+        self.east = east
         self.direction = 'X'
 
     def __str__(self):
@@ -50,6 +52,11 @@ class Die:
         as <, >, ^, v or X. """
         return self.direction
 
+    def GetParentsAsList(self):
+        if parent == None:
+            return []
+        return parent.GetParentsAsList() + self;
+
     def GetMoves(self):
         """ Returns a list of new dice objects that can represent the possible
         states that the dice can be in for the next move. """
@@ -61,13 +68,15 @@ class Die:
             (-1, 0),
             (1, 0),
         ]
-        for move in possible_directions:
+
+        for move, direction in zip(possible_directions, range(1,5)):
             new_pos = (self.start[0] + move[0], self.start[1] + move[1])
             if not (0 <= new_pos[0] < len(self.board) and 0 <= new_pos[1] < len(self.board[0])):
                 continue
             if self.board[new_pos[0]][new_pos[1]] == '*':
                 continue
-            moves.append(Die(new_pos, self.goal, self.board))
+            new_die = self.Move(direction)
+            moves.append(new_die)
         return moves
 
     def Move(self, direction):
