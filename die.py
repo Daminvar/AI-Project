@@ -1,5 +1,11 @@
 from read_maze import *
 
+# According to the professor's definition, the dice looks
+# as such when unrolled:
+#   2
+# 4 1 3 6
+#   5
+
 class Die:
 	""" Represents the die for the game. """
 	def __init__(self, start, goal, board):
