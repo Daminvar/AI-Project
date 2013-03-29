@@ -5,13 +5,17 @@ from read_maze import *
 #   2
 # 4 1 3 6
 #   5
+#
+# Authors: Sean Mullen
 
 class Die:
     """ Represents the die for the game. """
     def __init__(self, start, goal, board):
+    	# start, goal and current location are in (y, x)
         self.board = board
         self.start = start
         self.goal = goal
+        self.curLoc = start
         self.value = 1
         self.north = 2
         self.direction = 'X'
@@ -21,9 +25,9 @@ class Die:
         result = ""
 
         for s in range(len(self.board)):
-            if s == self.start[0]:
+            if s == self.curLoc[1]:
                 rowAsString = list(self.board[s])
-                rowAsString[self.start[1]] = str(self.value)
+                rowAsString[self.curLoc[0]] = str(self.value)
                 result += ''.join(rowAsString)
             else:
                 result += self.board[s]
