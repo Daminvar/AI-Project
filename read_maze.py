@@ -18,14 +18,14 @@ def read_maze(filename):
 			
 			if temp > -1:
 				# create start tuple in Y, X
-				start = (temp, index)
+				start = (index, temp)
 		
 		if (goal == None):
 			temp = find(line, 'G')
 			
 			if temp > -1:
 				# create goal tuple in Y, X
-				goal = (temp, index)
+				goal = (index, temp)
 			
 		index += 1
 	

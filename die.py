@@ -63,11 +63,11 @@ class Die:
         moves = []
 
         possible_directions = [
-            (0, -1),
-            (0, 1),
-            (-1, 0),
-            (1, 0),
-        ]
+                (0, -1),
+                (0, 1),
+                (-1, 0),
+                (1, 0),
+                ]
 
         for move, direction in zip(possible_directions, range(1,5)):
             new_pos = (self.start[0] + move[0], self.start[1] + move[1])
@@ -79,18 +79,84 @@ class Die:
             moves.append(new_die)
         return moves
 
+
     def Move(self, direction):
         """ Moves the die in a direction. 1 is up, 2 is right,
          3 is down and is 4 left. """
         if direction == 1:
-            next = 7 - self.value
+            next = 7 - self.north
             self.north = self.value
             self.value = next
 
+            self.start = (self.start[0], self.start[1] - 1)	
+        elif direction == 2:
+            next = 7 - self.east
+            self.east = self.value
+            self.value = next
+
+            self.start = (self.start[0] + 1, self.start[1])
+        elif direction == 3:
+            next = 7 - self.value
+            self.value = self.north
+            self.north = next
+
+            self.start = (self.start[0], self.start[1] + 1)
+        elif direction == 4:
+            next = 7 - self.value
+            self.value = self.east
+            self.east = next	
+
+            self.start = (self.start[0] - 1, self.start[1])		
+
+        self.updateDirection(direction)
+
+    def updateDirection(self, direction):
+        """ This is for updating '1' direction. Just broken out here to keep
+        Move more clean. """
+        if direction == 1:
+            if self.direction == 'X':
+                self.direction = '^'
+            elif self.direction == 'V':
+                self.direction = 'X'	
+        elif direction == 2:
+            if self.direction == 'X':
+                self.direction = '>'
+            elif self.direction == '<':
+                self.direction == 'X'
+        elif direction == 3:
+            if self.direction == 'X':
+                self.direction = 'v'
+            elif self.direction == '^':
+                self.direction == 'X'
+        elif direction == 4:
+            if self.direction == 'X':
+                self.direction = '<'
+            elif self.direction == '>':
+                self.direction == 'X'
 
 
 if __name__ == '__main__':
     data = read_maze('maze5.txt')
-    die = Die(data[0], data[1], data[2])
-    for newDie in die.GetMoves():
-        print newDie
+    die = Die(data[0], data[1], data[2], None, 1, 2, 3)
+    print die
+
+    die.Move(3)
+
+    print die
+
+    for i in range(11):
+        die.Move(4)
+        print die
+
+    die.Move(1)
+    print die
+
+    die.Move(2)
+    print die
+
+    for i in range(11):
+        die.Move(3)
+        print die
+
+    die.Move(4)
+    print die
