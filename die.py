@@ -29,6 +29,7 @@ class Die:
                 result += ''.join(rowAsString)
             else:
                 result += self.board[s]
+            result += '\n'
 
         result += "\nOne is facing: " + self.Direction()
 
@@ -114,12 +115,13 @@ class Die:
 
             newStart = (self.start[0], self.start[1] - 1) 
 
-        self.updateDirection(direction)
-        return Die(newStart, self.goal, self.board,
+        newDie = Die(newStart, self.goal, self.board,
                 self, newValue, newNorth, newEast)
+        newDie.updateDirection(direction)
+        return newDie 
 
-        def updateDirection(self, direction):
-            """ This is for updating '1' direction. Just broken out here to keep
+    def updateDirection(self, direction):
+        """ This is for updating '1' direction. Just broken out here to keep
         Move more clean. """
         if direction == 1:
             if self.direction == 'X':
@@ -146,6 +148,10 @@ class Die:
 if __name__ == '__main__':
     data = read_maze('maze5.txt')
     die = Die(data[0], data[1], data[2], None, 1, 2, 3)
+
+    for die in die.GetMoves():
+        print die
+    """
     print die
 
     die = die.Move(3)
@@ -168,3 +174,4 @@ if __name__ == '__main__':
 
     die = die.Move(4)
     print die
+    """
