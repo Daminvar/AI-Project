@@ -63,10 +63,10 @@ class Die:
         moves = []
 
         possible_directions = [
-                (0, -1),
-                (0, 1),
                 (-1, 0),
+                (0, 1),
                 (1, 0),
+                (0, -1),
                 ]
 
         for move, direction in zip(possible_directions, range(1,5)):
@@ -88,25 +88,25 @@ class Die:
             self.north = self.value
             self.value = next
 
-            self.start = (self.start[0], self.start[1] - 1)	
+            self.start = (self.start[0] - 1, self.start[1])    
         elif direction == 2:
             next = 7 - self.east
             self.east = self.value
             self.value = next
 
-            self.start = (self.start[0] + 1, self.start[1])
+            self.start = (self.start[0], self.start[1] + 1)
         elif direction == 3:
             next = 7 - self.value
             self.value = self.north
             self.north = next
 
-            self.start = (self.start[0], self.start[1] + 1)
+            self.start = (self.start[0] + 1, self.start[1])
         elif direction == 4:
             next = 7 - self.value
             self.value = self.east
-            self.east = next	
-
-            self.start = (self.start[0] - 1, self.start[1])		
+            self.east = next    
+            
+            self.start = (self.start[0], self.start[1] - 1) 
 
         self.updateDirection(direction)
 
@@ -117,7 +117,7 @@ class Die:
             if self.direction == 'X':
                 self.direction = '^'
             elif self.direction == 'V':
-                self.direction = 'X'	
+                self.direction = 'X'    
         elif direction == 2:
             if self.direction == 'X':
                 self.direction = '>'
@@ -146,7 +146,7 @@ if __name__ == '__main__':
 
     for i in range(11):
         die.Move(4)
-        print die
+        #print die
 
     die.Move(1)
     print die
