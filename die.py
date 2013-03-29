@@ -81,37 +81,45 @@ class Die:
 
 
     def Move(self, direction):
-        """ Moves the die in a direction. 1 is up, 2 is right,
-         3 is down and is 4 left. """
+        """ Moves the die in a direction. 1 is up, 2 is right, 3 is down and is
+        4 left. """
+
+        newStart = ()
+        newNorth = self.north
+        newValue = self.value
+        newEast = self.east
+
         if direction == 1:
             next = 7 - self.north
-            self.north = self.value
-            self.value = next
+            newNorth = self.value
+            newValue = next
 
-            self.start = (self.start[0] - 1, self.start[1])    
+            newStart = (self.start[0] - 1, self.start[1])
         elif direction == 2:
             next = 7 - self.east
-            self.east = self.value
-            self.value = next
+            newEast = self.value
+            newValue = next
 
-            self.start = (self.start[0], self.start[1] + 1)
+            newStart = (self.start[0], self.start[1] + 1)
         elif direction == 3:
             next = 7 - self.value
-            self.value = self.north
-            self.north = next
+            newValue = self.north
+            newNorth = next
 
-            self.start = (self.start[0] + 1, self.start[1])
+            newStart = (self.start[0] + 1, self.start[1])
         elif direction == 4:
             next = 7 - self.value
-            self.value = self.east
-            self.east = next    
-            
-            self.start = (self.start[0], self.start[1] - 1) 
+            newValue = self.east
+            newEast = next    
+
+            newStart = (self.start[0], self.start[1] - 1) 
 
         self.updateDirection(direction)
+        return Die(newStart, self.goal, self.board,
+                self, newValue, newNorth, newEast)
 
-    def updateDirection(self, direction):
-        """ This is for updating '1' direction. Just broken out here to keep
+        def updateDirection(self, direction):
+            """ This is for updating '1' direction. Just broken out here to keep
         Move more clean. """
         if direction == 1:
             if self.direction == 'X':
@@ -140,23 +148,23 @@ if __name__ == '__main__':
     die = Die(data[0], data[1], data[2], None, 1, 2, 3)
     print die
 
-    die.Move(3)
+    die = die.Move(3)
 
     print die
 
     for i in range(11):
-        die.Move(4)
+        die = die.Move(4)
         #print die
 
-    die.Move(1)
+    die = die.Move(1)
     print die
 
-    die.Move(2)
+    die = die.Move(2)
     print die
 
     for i in range(11):
-        die.Move(3)
+        die = die.Move(3)
         print die
 
-    die.Move(4)
+    die = die.Move(4)
     print die
