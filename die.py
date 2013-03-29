@@ -55,6 +55,6 @@ class Die:
 			
 		
 		
-data = read_maze('maze5.txt')
-print Die(data[0], data[1], data[2])
-	
+if __name__ == '__main__':
+    data = read_maze('maze5.txt')
+    print Die(data[0], data[1], data[2])
