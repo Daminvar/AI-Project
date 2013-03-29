@@ -15,7 +15,6 @@ class Die:
 		self.board = board
 		self.start = start
 		self.goal = goal
-		self.curLoc = start
 		self.value = 1
 		self.north = 2
 		self.east = 3
@@ -26,9 +25,9 @@ class Die:
 		result = ""
 
 		for s in range(len(self.board)):
-			if s == self.curLoc[1]:
+			if s == self.start[1]:
 				rowAsString = list(self.board[s])
-				rowAsString[self.curLoc[0]] = str(self.value)
+				rowAsString[self.start[0]] = str(self.value)
 				result += ''.join(rowAsString)
 			else:
 				result += self.board[s]
@@ -68,25 +67,25 @@ class Die:
 			self.north = self.value
 			self.value = next
 			
-			self.curLoc = (self.curLoc[0], self.curLoc[1] - 1)	
+			self.start = (self.start[0], self.start[1] - 1)	
 		elif direction == 2:
 			next = 7 - self.east
 			self.east = self.value
 			self.value = next
 						
-			self.curLoc = (self.curLoc[0] + 1, self.curLoc[1])
+			self.start = (self.start[0] + 1, self.start[1])
 		elif direction == 3:
 			next = 7 - self.value
 			self.value = self.north
 			self.north = next
 						
-			self.curLoc = (self.curLoc[0], self.curLoc[1] + 1)
+			self.start = (self.start[0], self.start[1] + 1)
 		elif direction == 4:
 			next = 7 - self.value
 			self.value = self.east
 			self.east = next	
 						
-			self.curLoc = (self.curLoc[0] - 1, self.curLoc[1])		
+			self.start = (self.start[0] - 1, self.start[1])		
 			
 		self.updateDirection(direction)
 
