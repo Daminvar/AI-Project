@@ -1,3 +1,7 @@
+# Handles reading in maze files.
+#
+# Authors: Sean Mullen, Dennis Honeyman
+
 
 def read_maze(filename):
 	'''Returns the maze as a 2D array of booleans, the starting coordinates,
