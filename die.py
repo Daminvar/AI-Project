@@ -11,7 +11,7 @@ from read_maze import *
 class Die:
 	""" Represents the die for the game. """
 	def __init__(self, start, goal, board):
-		# start, goal and current location are in (y, x)
+		# start, goal are in (y, x)
 		self.board = board
 		self.start = start
 		self.goal = goal
@@ -57,7 +57,13 @@ class Die:
 	def GetMoves(self):
 		""" Returns a list of new dice objects that can represent the possible
 		states that the dice can be in for the next move. """
-		pass
+		result = []
+		
+		for i in range(4):
+			# create new moves
+			result.append(Die(self.start, self.goal, self.board))
+		
+		
 
 	def Move(self, direction):
 		""" Moves the die in a direction. 1 is up, 2 is right,
@@ -124,5 +130,17 @@ if __name__ == '__main__':
 	
 	for i in range(11):
 		die.Move(4)
+		print die
 	
+	die.Move(1)
+	print die
+	
+	die.Move(2)
+	print die
+	
+	for i in range(11):
+		die.Move(3)
+		print die
+	
+	die.Move(4)
 	print die
