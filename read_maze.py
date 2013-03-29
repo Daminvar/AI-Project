@@ -15,7 +15,7 @@ def read_maze(filename):
 	
 	index = 0
 	for line in fileInput:
-		maze.append(line)
+		maze.append(line.strip())
 		
 		if (start == None):
 			temp = find(line, 'S')
