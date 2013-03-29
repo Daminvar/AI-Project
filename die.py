@@ -53,7 +53,22 @@ class Die:
     def GetMoves(self):
         """ Returns a list of new dice objects that can represent the possible
         states that the dice can be in for the next move. """
-        pass
+        moves = []
+
+        possible_directions = [
+            (0, -1),
+            (0, 1),
+            (-1, 0),
+            (1, 0),
+        ]
+        for move in possible_directions:
+            new_pos = (self.start[0] + move[0], self.start[1] + move[1])
+            if not (0 <= new_pos[0] < len(self.board) and 0 <= new_pos[1] < len(self.board[0])):
+                continue
+            if self.board[new_pos[0]][new_pos[1]] == '*':
+                continue
+            moves.append(Die(new_pos, self.goal, self.board))
+        return moves
 
     def Move(self, direction):
         """ Moves the die in a direction. 1 is up, 2 is right,
@@ -67,4 +82,6 @@ class Die:
 
 if __name__ == '__main__':
     data = read_maze('maze5.txt')
-    print Die(data[0], data[1], data[2])
+    die = Die(data[0], data[1], data[2])
+    for newDie in die.GetMoves():
+        print newDie
