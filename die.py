@@ -20,7 +20,7 @@ class Die:
 
     def __str__(self):
         """ Returns the representation of the die upon the board. """
-        result = ""
+        result = "\n"
 
         for s in range(len(self.board)):
             if s == self.start[0]:
@@ -31,7 +31,7 @@ class Die:
                 result += self.board[s]
             result += '\n'
 
-        result += "\nOne is facing: " + self.Direction()
+        result += "-- One is facing: " + self.Direction()
 
         return result
 
@@ -145,31 +145,47 @@ class Die:
 
 
 if __name__ == '__main__':
+    data = read_maze('maze1.txt')
+    die = Die(data[0], data[1], data[2], None, 1, 2, 3)
+    
+    print "#### MAZE 1 ####"
+    print die
+    moves = [3,2,2,2,2,1]
+    
+    for i in moves:
+        die = die.Move(i)
+        print die
+        
+        
+    data = read_maze('maze2.txt')
+    die = Die(data[0], data[1], data[2], None, 1, 2, 3)
+
+    print "#### MAZE 2 ####"
+    print die
+    moves = [3,2,1,4,3,3,3,2,2,3,4,1,2,2,2,3,4,1,1,2]
+    
+    for i in moves:
+        die = die.Move(i)
+        print diel
+        
     data = read_maze('maze4.txt')
     die = Die(data[0], data[1], data[2], None, 1, 2, 3)
 
+    print "#### MAZE 4 ####"
     print die
+    moves = [3,2,1,4,3,3,3,2,3,4,1,1,4,4,3,3,4,1,2,1,1,4,4,1,2]
     
-    die = die.Move(3)
+    for i in moves:
+        die = die.Move(i)
+        print die
     
-    die = die.Move(2)
-    die = die.Move(1)
-    die = die.Move(4)
-    die = die.Move(3)
-    die = die.Move(3)
-    die = die.Move(3)
-    die = die.Move(2)
-    die = die.Move(3)
-    die = die.Move(4)
-    die = die.Move(1)
-    """
-    die = die.Move()
-    die = die.Move()
-    die = die.Move()
-    die = die.Move()
-    die = die.Move()
-    die = die.Move()
-    die = die.Move()
-    die = die.Move()"""
+    data = read_maze('maze5.txt')
+    die = Die(data[0], data[1], data[2], None, 1, 2, 3)
+
+    print "#### MAZE 5 ####"
+    print die
+    moves = [3,4,4,4,4,4,4,4,4,4,4,4,1,2,3,3,3,3,3,3,3,3,3,3,3,4]
     
- 
+    for i in moves:
+        die = die.Move(i)
+        print die
