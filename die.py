@@ -35,6 +35,17 @@ class Die:
 
         return result
 
+    def __eq__(self, other):
+        if other == None:
+            return False
+        return self.start == other.start and \
+            self.value == other.value and \
+            self.north == other.north and \
+            self.east == other.east
+
+    def __hash__(self):
+        return hash(self.start) ^ hash(self.value) ^ hash(self.north) ^ hash(self.east)
+
     def Board(self):
         return self.board
 
@@ -154,11 +165,6 @@ if __name__ == '__main__':
     data = read_maze('maze5.txt')
     die = Die(data[0], data[1], data[2], None, 1, 2, 3)
 
-    for die in die.GetMoves():
-        print die
-    """
-    print die
-
     die = die.Move(3)
 
     print die
@@ -178,5 +184,4 @@ if __name__ == '__main__':
         print die
 
     die = die.Move(4)
-    print die
-    """
+    print len(die.GetParentsAsList())
