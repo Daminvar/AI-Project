@@ -19,19 +19,26 @@ def main():
     
     die = Die(data[0], data[1], data[2], None, 1, 2, 3)
     
-    results, manhattan_analysis = astar(die, manhattanDistance)
-    _, straight_line_analysis = astar(die, straightLineDistance)
+    manhattan_results, manhattan_analysis = astar(die, manhattanDistance)
+    straight_line_results, straight_line_analysis = astar(die, straightLineDistance)
+    direction_results, direction_analysis = astar(die, directionHeuristic)
 
-    if results != None:
-        for res in results:
-            print res
+    for results in \
+        [("Manhattan", manhattan_results), ("Straight line", straight_line_results), ("Direction", direction_results)]:
 
-        print '\nIt takes %s moves to solve the puzzle' % len(results)
-    else:
-        print 'The puzzle is impossible'
+        print '---', results[0], '---'
+        if results[1] != None:
+            for res in results[1]:
+                print res
+
+            print '\nIt takes %s moves to solve the puzzle' % len(results[1])
+        else:
+            print 'The puzzle is impossible'
+
+    print ''
 
     for analysis in \
-        [("Manhattan", manhattan_analysis), ("Straight line", straight_line_analysis)]:
+        [("Manhattan", manhattan_analysis), ("Straight line", straight_line_analysis), ("Direction", direction_analysis)]:
         print '---', analysis[0], '---'
         print '\t%s nodes generated' % analysis[1][0]
         print '\t%s nodes visited' % analysis[1][1]
