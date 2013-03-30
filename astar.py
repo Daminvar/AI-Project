@@ -16,7 +16,7 @@ def astar(die, heuristic):
 
         for newDie in currentDie.GetMoves():
             tentative_g = len(newDie.GetParentsAsList()) + heuristic(newDie)
-            if visited.get(newDie, 20000) <= tentative_g
+            if visited.get(newDie, 20000) <= tentative_g:
                 continue
 
             if not newDie in open_set:
@@ -25,3 +25,4 @@ def astar(die, heuristic):
     return None
 
 if __name__ == '__main__':
+    pass
