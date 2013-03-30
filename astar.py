@@ -34,5 +34,5 @@ if __name__ == '__main__':
     die1 = Die(data[0], data[1], data[2], None, 1, 2, 3)
     die2 = Die(data[0], data[1], data[2], None, 1, 2, 3)
 
-    for res in astar(die1, manhattanDistance):
+    for res in astar(die1, straightLineDistance):
         print res
