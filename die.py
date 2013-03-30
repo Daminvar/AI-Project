@@ -68,7 +68,7 @@ class Die:
                 (0, 1),
                 (1, 0),
                 (0, -1),
-                ]
+        ]
 
         for move, direction in zip(possible_directions, range(1,5)):
             new_pos = (self.start[0] + move[0], self.start[1] + move[1])
@@ -117,61 +117,56 @@ class Die:
 
         newDie = Die(newStart, self.goal, self.board,
                 self, newValue, newNorth, newEast)
-        newDie.updateDirection(direction)
+        newDie.updateDirection()
+        
+        print newDie
+        
         return newDie 
 
-    def updateDirection(self, direction):
+    def updateDirection(self):
         """ This is for updating '1' direction. Just broken out here to keep
         Move more clean. """
-        if direction == 1:
-            if self.direction == 'X':
-                self.direction = '^'
-            elif self.direction == 'V':
-                self.direction = 'X'    
-        elif direction == 2:
-            if self.direction == 'X':
-                self.direction = '>'
-            elif self.direction == '<':
-                self.direction == 'X'
-        elif direction == 3:
-            if self.direction == 'X':
-                self.direction = 'v'
-            elif self.direction == '^':
-                self.direction == 'X'
-        elif direction == 4:
-            if self.direction == 'X':
-                self.direction = '<'
-            elif self.direction == '>':
-                self.direction == 'X'
+        
+        if self.value == 1:
+            self.direction = 'X'
+        elif self.north == 6:
+            self.direction = 'v'
+        elif self.north == 1:
+            self.direction = '^'
+        elif self.east == 1:
+            self.direction = '>'
+        elif self.east == 6:
+            self.direction = '<'
+        else:
+            raise ValueError('Die have an invalid value of ' + self.value)
 
 
 if __name__ == '__main__':
-    data = read_maze('maze5.txt')
+    data = read_maze('maze4.txt')
     die = Die(data[0], data[1], data[2], None, 1, 2, 3)
 
-    for die in die.GetMoves():
-        print die
-    """
     print die
-
+    
     die = die.Move(3)
-
-    print die
-
-    for i in range(11):
-        die = die.Move(4)
-        #print die
-
-    die = die.Move(1)
-    print die
-
+    
     die = die.Move(2)
-    print die
-
-    for i in range(11):
-        die = die.Move(3)
-        print die
-
+    die = die.Move(1)
     die = die.Move(4)
-    print die
+    die = die.Move(3)
+    die = die.Move(3)
+    die = die.Move(3)
+    die = die.Move(2)
+    die = die.Move(3)
+    die = die.Move(4)
+    die = die.Move(1)
     """
+    die = die.Move()
+    die = die.Move()
+    die = die.Move()
+    die = die.Move()
+    die = die.Move()
+    die = die.Move()
+    die = die.Move()
+    die = die.Move()"""
+    
+ 
