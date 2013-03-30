@@ -19,7 +19,8 @@ def main():
     
     die = Die(data[0], data[1], data[2], None, 1, 2, 3)
     
-    results, analysis = astar(die, manhattanDistance)
+    results, manhattan_analysis = astar(die, manhattanDistance)
+    _, straight_line_analysis = astar(die, straightLineDistance)
 
     if results != None:
         for res in results:
@@ -28,8 +29,12 @@ def main():
         print '\nIt takes %s moves to solve the puzzle' % len(results)
     else:
         print 'The puzzle is impossible'
-    print '%s nodes generated' % analysis[0]
-    print '%s nodes visited' % analysis[1]
+
+    for analysis in \
+        [("Manhattan", manhattan_analysis), ("Straight line", straight_line_analysis)]:
+        print '---', analysis[0], '---'
+        print '\t%s nodes generated' % analysis[1][0]
+        print '\t%s nodes visited' % analysis[1][1]
     
     
 if __name__ == '__main__':
