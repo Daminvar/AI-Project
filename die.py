@@ -44,6 +44,9 @@ class Die:
     def Goal(self):
         return self.goal
 
+    def IsGoal(self):
+        return self.value == 1 and self.start == self.goal
+
     def Value(self):
         """ Returns the value face up on the die. """
         return self.value
