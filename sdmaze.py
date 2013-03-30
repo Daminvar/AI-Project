@@ -1,7 +1,9 @@
-from read_maze import *
+import sys
+
+from astar import *
 from die import *
 from heuristics import *
-import sys
+from read_maze import *
 
 def main():
     if len(sys.argv) != 2:
@@ -17,8 +19,17 @@ def main():
     
     die = Die(data[0], data[1], data[2], None, 1, 2, 3)
     
-    print 'Initial board state is: '
-    print die
+    results, analysis = astar(die, manhattanDistance)
+
+    if results != None:
+        for res in results:
+            print res
+
+        print '\nIt takes %s moves to solve the puzzle' % len(results)
+    else:
+        print 'The puzzle is impossible'
+    print '%s nodes generated' % analysis[0]
+    print '%s nodes visited' % analysis[1]
     
     
 if __name__ == '__main__':
