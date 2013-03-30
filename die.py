@@ -124,8 +124,6 @@ class Die:
                 self, newValue, newNorth, newEast)
         newDie.updateDirection()
         
-        print newDie
-        
         return newDie 
 
     def updateDirection(self):
@@ -143,7 +141,7 @@ class Die:
         elif self.east == 6:
             self.direction = '<'
         else:
-            raise ValueError('Die have an invalid value of ' + self.value)
+            self.direction = 'O'
 
 
 if __name__ == '__main__':
