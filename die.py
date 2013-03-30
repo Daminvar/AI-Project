@@ -66,6 +66,13 @@ class Die:
         """ Returns the direction the 'one' side is facing 
         as <, >, ^, v or X. """
         return self.direction
+        
+    def GetAbsStart(self):
+    	start = None
+    	for s in range(len(self.board)):
+    		for c in range(len(self.board[s])):
+    			if self.board[s][c] == 'S':
+    				return (s, c)
 
     def GetParentsAsList(self):
         if self.parent == None:
