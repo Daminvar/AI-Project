@@ -44,6 +44,9 @@ class Die:
     def Goal(self):
         return self.goal
 
+    def IsGoal(self):
+        return self.value == 1 and self.start == self.goal
+
     def Value(self):
         """ Returns the value face up on the die. """
         return self.value
@@ -54,9 +57,9 @@ class Die:
         return self.direction
 
     def GetParentsAsList(self):
-        if parent == None:
+        if self.parent == None:
             return []
-        return parent.GetParentsAsList() + self;
+        return self.parent.GetParentsAsList() + [self];
 
     def GetMoves(self):
         """ Returns a list of new dice objects that can represent the possible
@@ -77,6 +80,8 @@ class Die:
             if self.board[new_pos[0]][new_pos[1]] == '*':
                 continue
             new_die = self.Move(direction)
+            if new_die.value == 6:
+                continue
             moves.append(new_die)
         return moves
 
